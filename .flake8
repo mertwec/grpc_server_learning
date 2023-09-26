@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 119
+exclude = .git,__pycache__,.gitignore,.env,./proto,.venv,.idea,*_pb2.py,*_pb2_grpc.py
+extend-ignore = W293
