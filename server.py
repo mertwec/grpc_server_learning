@@ -5,7 +5,7 @@ from grpc import StatusCode
 
 from proto import hw_pb2, hw_pb2_grpc
 from tools.settings import logger
-
+import asyncio
 
 class Greeter(hw_pb2_grpc.GreeterServicer):
     async def SayHello(self, request: hw_pb2.HelloRequest, context: ServicerContext) -> hw_pb2.HelloReply:
@@ -22,6 +22,8 @@ class Greeter(hw_pb2_grpc.GreeterServicer):
         context.set_trailing_metadata((("key", 'value'),("user", "1")))
         metadata = context.invocation_metadata()
         logger.debug(metadata)
+        
+        await asyncio.sleep(1)
         
         return hw_pb2.HelloReply(message='Hello, %s!' % request.name, 
                                  model=_wrappers_pb2.StringValue(value = "ada"))
